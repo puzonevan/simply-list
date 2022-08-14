@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 import Header from './header';
-import Home from './home';
+import AddTask from './addtask';
 import TaskList from './list'
 
 const todos = [
@@ -13,19 +13,69 @@ const todos = [
 		emoji: '⚡️', 
 		task: 'deploy this app', 
 		completed: false,
-	}
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
+	{
+		emoji: '🌈', 
+		task: 'create this app', 
+		completed: false,
+	},
 ]
 
 const App = () => {
 
 	const [emoji, setEmoji] = useState('🌈');
-	const [list , setList] = useState(todos);
+	const [list] = useState(todos);
 
 	return (
 		<div id="app">
 			<Header emoji={emoji} setEmoji={setEmoji} />
 			<TaskList todos={list} />
-			<Home emoji={emoji} />
+			<AddTask emoji={emoji} />
 		</div>
 	)
 	}

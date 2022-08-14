@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 
 const TaskList = ({todos}) => {
     return (
-        <List sx={{ bgcolor: 'background.paper' }}>
+        <List sx={{ bgcolor: '#FAFAFA', height: 200, overflow: 'scroll' }} elevation='4' >
             {todos.map((todo, index) => <Task todo={todo} key={`task-${index}`} />)}
         </List>
     )
