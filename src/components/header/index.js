@@ -10,20 +10,18 @@ const Header = ({emoji, setEmoji}) => {
 
 	return (
 		<header class={style.header}>
-			<h1>Simply Lists</h1>
+			<h1>Simply List</h1>
 			<nav>
 				<FormControl fullWidth>
 					<InputLabel id="demo-simple-select-label">Age</InputLabel>
 					<Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
+						labelId="emoji-select-label"
+						id="emoji-select"
 						value={emoji}
-						label="Age"
+						label="Emoji"
 						onChange={(e) => setEmoji(e.target.value)}
 					>
-						<MenuItem value={emojis[0]}>{emojis[0]}</MenuItem>
-						<MenuItem value={emojis[1]}>{emojis[1]}</MenuItem>
-						<MenuItem value={emojis[2]}>{emojis[2]}</MenuItem>
+						{emojis.map(emoji => <MenuItem key={`emoji-${emoji}`}value={emoji}>{emoji}</MenuItem>)}
 					</Select>
 				</FormControl>
 			</nav>

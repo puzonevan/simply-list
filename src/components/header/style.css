@@ -1,0 +1,11 @@
+header{
+    display: flex;
+}
+
+header > h1{
+    width: 80%;    
+}
+header > nav{
+    margin-left: auto;
+    margin-right: 0;
+}

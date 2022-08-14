@@ -17,3 +17,11 @@ html {
 * {
 	box-sizing: border-box;
 }
+
+body {
+	width: 40%;
+}
+
+#app > *{
+	margin-bottom: 20px;
+}
