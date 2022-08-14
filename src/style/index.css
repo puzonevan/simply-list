@@ -1,8 +1,11 @@
-html, body {
+html {
 	height: 100%;
 	width: 100%;
 	padding: 0;
-	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	background: #FAFAFA;
 	font-family: 'Helvetica Neue', arial, sans-serif;
 	font-weight: 400;
@@ -13,8 +16,4 @@ html, body {
 
 * {
 	box-sizing: border-box;
-}
-
-#app {
-	height: 100%;
 }

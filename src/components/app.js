@@ -1,5 +1,4 @@
 import Header from './header';
-
 import Home from './home';
 
 const App = () => (
