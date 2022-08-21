@@ -1,81 +1,95 @@
-import { useState } from 'preact/hooks';
+import { useReducer, useState } from 'preact/hooks';
 import Header from './header';
 import AddTask from './addtask';
 import TaskList from './list'
 
-const todos = [
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '⚡️', 
-		task: 'deploy this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-	{
-		emoji: '🌈', 
-		task: 'create this app', 
-		completed: false,
-	},
-]
+const initialTodos= [
+    {
+        id: 1, 
+        emoji: '🌈', 
+        task: 'create this app', 
+        completed: false,
+        editing: false,
+    },
+    {
+        id: 2,
+        emoji: '⚡️', 
+        task: 'deploy this app', 
+        completed: false,
+        editing: false,
+    },
+    {
+        id: 3,
+        emoji: '🌈', 
+        task: 'create this app', 
+        completed: false,
+        editing: false,
+    },
+    {
+        id: 4,
+        emoji: '🌈', 
+        task: 'create this app', 
+        completed: false,
+        editing: false,
+    },
+    {
+        id: 5,
+        emoji: '🌈', 
+        task: 'create this app', 
+        completed: false,
+        editing: false,
+    },
+    {
+        id: 6,
+        emoji: '🌈', 
+        task: 'create this app', 
+        completed: false,
+        editing: false,
+    },
+    {
+        id: 7,
+        emoji: '🌈', 
+        task: 'create this app', 
+        completed: false,
+        editing: false,
+    },
+    {
+        id: 8,
+        emoji: '🌈', 
+        task: 'create this app', 
+        completed: false,
+        editing: false,
+    }
+];
+
+const todoReducer = (state, action) => {
+    switch(action.type) {
+        case 'editItem': {
+            return state.map(todo => {
+                if(todo.id !== action.payload.id){
+                    return {
+                        ...todo, 
+                        editing: false,
+                    }
+                }
+                return {
+                    ...todo, 
+                    editing: true,
+                }
+            })
+        }
+    }
+};
 
 const App = () => {
 
 	const [emoji, setEmoji] = useState('🌈');
-	const [list] = useState(todos);
+	const [list, dispatch] = useReducer(todoReducer, initialTodos);
 
 	return (
 		<div id="app">
 			<Header emoji={emoji} setEmoji={setEmoji} />
-			<TaskList todos={list} />
-			<AddTask emoji={emoji} />
+			<TaskList todos={list} dispatch={dispatch} />
 		</div>
 	)
 	}

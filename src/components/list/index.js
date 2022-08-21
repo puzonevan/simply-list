@@ -8,16 +8,19 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 import ListItemText from '@mui/material/ListItemText';
+import TextField from '@mui/material/TextField';
 
-const TaskList = ({todos}) => {
+const TaskList = ({todos, dispatch}) => {
+
     return (
-        <List sx={{ bgcolor: '#FAFAFA', height: 200, overflow: 'scroll' }} elevation='4' >
-            {todos.map((todo, index) => <Task todo={todo} key={`task-${index}`} />)}
+        <List sx={{ bgcolor: '#FAFAFA', height: 200  }} elevation='4' >
+            {todos.map((todo, index) => <Task todo={todo} key={`task-${index}`} dispatch={dispatch} />)}
         </List>
     )
 }
 
-const Task = ({todo}) => {
+const Task = ({todo, dispatch}) => {
+
     return (
         <ListItem
             alignItems='center'
@@ -25,7 +28,11 @@ const Task = ({todo}) => {
             <ListItemAvatar>
                 <Avatar sx={{ bgcolor: '#FAFAFA' }}>{todo.emoji}</Avatar>
             </ListItemAvatar>
-            <ListItemText secondary={todo.task} />
+            {
+                todo.editing ? 
+                <TextField id="todo-task" defaultValue={todo.task} variant="standard" fullWidth autoFocus /> : 
+                <ListItemText secondary={todo.task} onClick={() => dispatch({ type: 'editItem', payload: todo })} />
+            }
             <Checkbox 
                 value={`task ${todo.task}`}
                 inputProps={{
