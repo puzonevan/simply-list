@@ -21,7 +21,3 @@ html {
 body {
 	width: 40%;
 }
-
-#app > *{
-	margin-bottom: 20px;
-}

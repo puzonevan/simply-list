@@ -1,7 +1,7 @@
 import { useReducer, useState } from 'preact/hooks';
 import Header from './header';
-import AddTask from './addtask';
-import TaskList from './list'
+import TaskList from './list';
+import AddTask from './addTask';
 
 const initialTodos= [
     {
@@ -90,6 +90,7 @@ const App = () => {
 		<div id="app">
 			<Header emoji={emoji} setEmoji={setEmoji} />
 			<TaskList todos={list} dispatch={dispatch} />
+            <AddTask />
 		</div>
 	)
 	}
