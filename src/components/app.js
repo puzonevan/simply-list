@@ -1,65 +1,46 @@
 import { useReducer, useState } from 'preact/hooks';
+
 import Header from './header';
 import TaskList from './list';
 import AddTask from './addTask';
+import { confetti, labels } from '../constants';
 
 const initialTodos= [
     {
         id: 1, 
-        emoji: '🔴', 
+        label: labels[0], 
+        emoji: confetti[0],
         task: 'create this app', 
         completed: false,
-        editing: false,
     },
     {
         id: 2,
-        emoji: '🔵', 
+        label: labels[1], 
+        emoji: confetti[1],
         task: 'deploy this app', 
         completed: false,
-        editing: false,
     },
     {
         id: 3,
-        emoji: '🔴', 
+        label: labels[2], 
+        emoji: confetti[2],
         task: 'create this app', 
         completed: false,
-        editing: false,
     },
     {
         id: 4,
-        emoji: '🔵', 
+        label: labels[3], 
+        emoji: confetti[3],
         task: 'create this app', 
         completed: false,
-        editing: false,
     },
     {
         id: 5,
-        emoji: '🔵', 
+        label: labels[4], 
+        emoji: confetti[4],
         task: 'create this app', 
         completed: false,
-        editing: false,
     },
-    {
-        id: 6,
-        emoji: '🔵', 
-        task: 'create this app', 
-        completed: false,
-        editing: false,
-    },
-    {
-        id: 7,
-        emoji: '🔵', 
-        task: 'create this app', 
-        completed: false,
-        editing: false,
-    },
-    {
-        id: 8,
-        emoji: '🔵', 
-        task: 'create this app', 
-        completed: false,
-        editing: false,
-    }
 ];
 
 const todoReducer = (state, action) => {

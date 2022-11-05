@@ -9,13 +9,10 @@ import Checkbox from '@mui/material/Checkbox';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
+import { confetti, labels, labelsHex } from '../../constants';
 import './style.css';
 
 const jsConfetti = new JSConfetti()
-
-const colors = ['#dd2e44', '#ffac33', '#fdcb58', '#78b158', '#55acee'];
-const colorEmojis = ['🔴', '🟠', '🟡', '🟢', '🔵'];
-const emojis = ['🌈', '⚡️', '💥', '✨', '💫', '🌸'];
 
 const TaskList = ({todos, dispatch}) => {
 
@@ -32,7 +29,11 @@ const TaskList = ({todos, dispatch}) => {
             }}
             elevation='4'
         >
-            {todos.map((todo, index) => <Task todo={todo} key={`task-${index}`} dispatch={dispatch} />)}
+            {
+                todos.map((todo, index) => {
+                    return <Task key={`task-${index}`} todo={todo}  dispatch={dispatch} />
+                })
+            }
         </List>
     )
 }
@@ -40,15 +41,8 @@ const TaskList = ({todos, dispatch}) => {
 const Task = ({todo, dispatch}) => {
 
     const [editable, setEditable] = useState(true);
-    // console.log(todo.task);
 
-    const checkboxColor = colors[colorEmojis.findIndex((emoji) => emoji === todo.emoji)];
-    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-
-    const handleKeyDown = (e) => {
-        // todo.task = task;
-        // if (e.key === 'Enter') dispatch({ type: 'editItem', todo })
-    }
+    const checkboxColor = labels[labelsHex.findIndex((emoji) => emoji === todo.emoji)];
 
     const handleOnBeforeInput = (e) => {
         if (e.inputType === 'insertParagraph') {
@@ -65,20 +59,17 @@ const Task = ({todo, dispatch}) => {
             setTimeout(() => setEditable(true), 500);
         }
     }
-    
-    // const handleOnFocusOut
 
     return (
         <ListItem
             alignItems='center'
         >
             <ListItemAvatar>
-                <Avatar sx={{ bgcolor: '#FAFAFA' }}>{randomEmoji}</Avatar>
+                <Avatar sx={{ bgcolor: '#FAFAFA' }}>{todo.emoji}</Avatar>
             </ListItemAvatar>
             <p 
                 style={{ width: '0', flexGrow: 1 }}
                 contentEditable={editable}
-                onKeyDown={handleKeyDown}
                 onInput={handleOnInput}
                 onBeforeInput={handleOnBeforeInput}
                 onBlur={(e) => dispatch({ type: 'editItem', payload: {...todo, task: e.target.innerText}})}
