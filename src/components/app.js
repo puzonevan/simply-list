@@ -6,56 +6,56 @@ import AddTask from './addTask';
 const initialTodos= [
     {
         id: 1, 
-        emoji: '🌈', 
+        emoji: '🔴', 
         task: 'create this app', 
         completed: false,
         editing: false,
     },
     {
         id: 2,
-        emoji: '⚡️', 
+        emoji: '🔵', 
         task: 'deploy this app', 
         completed: false,
         editing: false,
     },
     {
         id: 3,
-        emoji: '🌈', 
+        emoji: '🔴', 
         task: 'create this app', 
         completed: false,
         editing: false,
     },
     {
         id: 4,
-        emoji: '🌈', 
+        emoji: '🔵', 
         task: 'create this app', 
         completed: false,
         editing: false,
     },
     {
         id: 5,
-        emoji: '🌈', 
+        emoji: '🔵', 
         task: 'create this app', 
         completed: false,
         editing: false,
     },
     {
         id: 6,
-        emoji: '🌈', 
+        emoji: '🔵', 
         task: 'create this app', 
         completed: false,
         editing: false,
     },
     {
         id: 7,
-        emoji: '🌈', 
+        emoji: '🔵', 
         task: 'create this app', 
         completed: false,
         editing: false,
     },
     {
         id: 8,
-        emoji: '🌈', 
+        emoji: '🔵', 
         task: 'create this app', 
         completed: false,
         editing: false,
@@ -66,17 +66,21 @@ const todoReducer = (state, action) => {
     switch(action.type) {
         case 'editItem': {
             return state.map(todo => {
-                if(todo.id !== action.payload.id){
+                if (todo.id !== action.payload.id) return todo;
+                else if (todo.id === action.payload.id) {
                     return {
                         ...todo, 
-                        editing: false,
+                        task: action.payload.task
                     }
-                }
-                return {
-                    ...todo, 
-                    editing: true,
-                }
+                } 
             })
+        }
+        case 'addItem': {
+            const newItem = {
+                id: state.length + 1,
+                ...action.payload
+            }
+            return state.concat(newItem)
         }
     }
 };
@@ -90,7 +94,7 @@ const App = () => {
 		<div id="app">
 			<Header emoji={emoji} setEmoji={setEmoji} />
 			<TaskList todos={list} dispatch={dispatch} />
-            <AddTask />
+            <AddTask dispatch={dispatch} />
 		</div>
 	)
 	}

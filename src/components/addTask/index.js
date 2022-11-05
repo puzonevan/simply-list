@@ -5,12 +5,25 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 
-const AddTask = () => {
+const AddTask = ({dispatch}) => {
 
-    const [color, setColor] = useState('🔴');
+    const [emoji, setEmoji] = useState('🔴');
     const [task, setTask] = useState('');
+
+    const dispatchAdd = () => {
+        const newItem = {
+            emoji,
+            task, 
+            completed: false,
+            editing: false,
+        }
+        dispatch({ type: 'addItem', payload: newItem})
+    }
+
+    const enterPressed = (event) => {
+        if (event.key === 'Enter' && task !== '') dispatchAdd();
+    }
     
     return (
         <Box 
@@ -19,10 +32,23 @@ const AddTask = () => {
                 justifyContent: 'space-between'
             }}
         >
+            <TextField 
+                sx={{
+                    input: {color: '#555'},
+                    flexGrow: 2,
+                    margin: '0 10px',
+                }}
+                variant="outlined" 
+                size="small" 
+                placeholder='Eat a snack'
+                value={task}
+                onChange={(event) => setTask(event.target.value)}
+                onKeyPress={enterPressed}
+            />
             <FormControl  sx={{ minWidth: 60 }} size="small">
                 <Select
-                    value={color}
-                    onChange={(event) => setColor(event.target.value)}
+                    value={emoji}
+                    onChange={(event) => setEmoji(event.target.value)}
                     displayEmpty
                 >
                     <MenuItem value={'🔴'}>🔴</MenuItem>
@@ -32,17 +58,6 @@ const AddTask = () => {
                     <MenuItem value={'🔵'}>🔵</MenuItem>
                 </Select>
             </FormControl>
-            <TextField 
-                sx={{
-                    input: {color: '#333'}
-                }}
-                variant="outlined" 
-                size="small" 
-                defaultValue="Eat a snack"
-                value={task}
-                onChange={(event) => setTask(event.target.value)}
-            />
-            <Button variant="outlined">Add Task</Button>
         </Box>
     )
 }
